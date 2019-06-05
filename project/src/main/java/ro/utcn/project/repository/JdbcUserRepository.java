@@ -47,8 +47,8 @@ public class JdbcUserRepository implements UserRepository {
 
     @Override
     public void update(User user) {
-        template.update("UPDATE user SET username =?, password=? WHERE id= ?",
-                user.getUsername(),user.getPassword(),user.getId());
+        template.update("UPDATE user SET username =?, password=?, type=? WHERE id= ?",
+                user.getUsername(),user.getPassword(),user.getType(),user.getId());
     }
 
     @Override
@@ -65,6 +65,12 @@ public class JdbcUserRepository implements UserRepository {
         return users.isEmpty() ? Optional.empty() : Optional.of(users.get(0));
     }
 
+    @Override
+    public String getUserType(User user) {
+        List<User> users=template.query("SELECT * FROM user WHERE id=?",new Object[]{user.getId()},new UserMapper());
+        return users.get(0).getType();
+    }
+
     private int insert(User user){
         SimpleJdbcInsert insert= new SimpleJdbcInsert(template);
         insert.setTableName("user");
@@ -72,6 +78,7 @@ public class JdbcUserRepository implements UserRepository {
         Map<String, Object> data= new HashMap<>();
         data.put("username", user.getUsername());
         data.put("password",user.getPassword());
+        data.put("type",user.getType());
         return insert.executeAndReturnKey(data).intValue();
     }
 }

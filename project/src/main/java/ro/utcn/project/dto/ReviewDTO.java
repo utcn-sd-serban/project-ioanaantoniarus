@@ -5,6 +5,7 @@ import ro.utcn.project.entity.Review;
 
 @Data
 public class ReviewDTO {
+    private int id;
     private String title;
     private String username;
     private String text;
@@ -12,6 +13,7 @@ public class ReviewDTO {
 
     public static ReviewDTO ofEntity(Review review){
         ReviewDTO reviewDTO=new ReviewDTO();
+        reviewDTO.setId(review.getId());
         reviewDTO.setUsername(review.getUsername());
         reviewDTO.setTitle(review.getTitle());
         reviewDTO.setText(review.getText());

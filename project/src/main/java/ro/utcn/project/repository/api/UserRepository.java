@@ -21,5 +21,6 @@ public interface UserRepository {
 
     Optional<User> findByUsername(String username);
 
+    String getUserType(User user);
 
 }

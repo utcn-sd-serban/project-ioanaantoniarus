@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ro.utcn.project.dto.ReviewDTO;
 import ro.utcn.project.entity.Review;
+import ro.utcn.project.entity.User;
 import ro.utcn.project.repository.api.RepositoryFactory;
 
 import java.time.LocalDateTime;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class ReviewService {
     private final RepositoryFactory repositoryFactory;
+    private final UserService userService;
 
     @Transactional
     public List<ReviewDTO> findAllBookReviews(int bookId){
@@ -26,11 +28,12 @@ public class ReviewService {
     }
 
     @Transactional
-    public ReviewDTO addReview(String title, String text, String username, int bookId){
+    public ReviewDTO addReview(String title, String text, int bookId){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         LocalDateTime localDateTime= LocalDateTime.now();
         String date=localDateTime.format(formatter);
-        return ReviewDTO.ofEntity(repositoryFactory.createReviewRepository().save(new Review(bookId,title,username,text,date)));
+        User user=userService.loadCurrentUser();
+        return ReviewDTO.ofEntity(repositoryFactory.createReviewRepository().save(new Review(bookId,title,user.getUsername(),text,date)));
     }
 
 

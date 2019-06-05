@@ -50,4 +50,10 @@ public class UserService implements UserDetailsService {
         String name= SecurityContextHolder.getContext().getAuthentication().getName();
         return repositoryFactory.createUserRepository().findByUsername(name).orElseThrow(UserNotFoundException::new);
     }
+
+    @Transactional
+    public String getUserType(){
+        User user=loadCurrentUser();
+        return repositoryFactory.createUserRepository().getUserType(user);
+    }
 }

@@ -14,7 +14,7 @@ public class ReviewController {
 
     @PostMapping("/books/{id}/reviews")
     public ReviewDTO createReview(@RequestBody ReviewDTO dto, @PathVariable int id){
-        return reviewService.addReview(dto.getTitle(),dto.getText(),dto.getUsername(),id);
+        return reviewService.addReview(dto.getTitle(),dto.getText(),id);
     }
 
     @GetMapping("/books/{id}/reviews")

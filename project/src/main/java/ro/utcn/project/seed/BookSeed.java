@@ -35,9 +35,9 @@ public class BookSeed implements CommandLineRunner {
         }
 
         if (repositoryUser.findAll().isEmpty()){
-            repositoryUser.save(new User("ioana33", passwordEncoder.encode("ioana33")));
-            repositoryUser.save(new User("AnaBanana",passwordEncoder.encode("blabla")));
-            repositoryUser.save(new User("Andrei00",passwordEncoder.encode("0000")));
+            repositoryUser.save(new User("ioana33", passwordEncoder.encode("ioana33"),"regular"));
+            repositoryUser.save(new User("AnaBanana",passwordEncoder.encode("blabla"),"admin"));
+            repositoryUser.save(new User("Andrei00",passwordEncoder.encode("0000"),"regular"));
         }
     }
 }
