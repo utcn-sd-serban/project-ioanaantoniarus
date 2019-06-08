@@ -3,6 +3,7 @@ package ro.utcn.project.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import ro.utcn.project.dto.BookDTO;
+import ro.utcn.project.dto.RatingDTO;
 import ro.utcn.project.service.BookService;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public BookDTO create(@RequestBody BookDTO dto){
+    public BookDTO createBook(@RequestBody BookDTO dto){
         return bookService.addBook(dto.getName(),dto.getAuthor(),dto.getIsbn(),dto.getGenres());
     }
 
@@ -35,5 +36,10 @@ public class BookController {
     @GetMapping(value="/books",params="isbn")
     public BookDTO findByIsbn(@RequestParam("isbn") String isbn){
         return bookService.findByIsbn(isbn);
+    }
+
+    @PostMapping("/books/{id}")
+    public void addRating(@RequestBody RatingDTO dto, @PathVariable int id){
+        bookService.rateBook(Integer.parseInt(dto.getRating()),id);
     }
 }

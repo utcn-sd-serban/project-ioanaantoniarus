@@ -8,6 +8,7 @@ import SmartFilteredBooksList from './view/SmartFilteredBooksList';
 import SmartBookDetails from './view/SmartBookDetails';
 import SmartProMainPage from './view/SmartProMainPage';
 import SmartCreateBook from './view/SmartCreateBook';
+import SmartReviewDetails from './view/SmartReviewDetails';
 
 
 const App = () => (
@@ -21,6 +22,7 @@ const App = () => (
         <Route exact={true} component={SmartBookDetails} path="/book-details/:index" />
         <Route exact={true} component={SmartProMainPage} path="/pro-main-page" />
         <Route exact={true} component={SmartCreateBook} path="/create-book" />
+        <Route exact={true} component={SmartReviewDetails} path="/review-details/:index" />
       </Switch>
     </HashRouter>
   </div>

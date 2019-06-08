@@ -14,6 +14,18 @@ class BookDetailsPresenter {
         bookModel.changeNewReviewProperty(property, value);
     }
 
+    onAddRating(id, rating) {
+        bookModel.addRating(id, rating);
+        window.location.assign("#/books-list");
+    }
+
+    onViewDetails(index) {
+        bookModel.loadComments(index)
+            .then(() => {
+                window.location.assign("#/review-details/" + index);
+            });
+    }
+
 }
 
 const bookDetailsPresenter = new BookDetailsPresenter();

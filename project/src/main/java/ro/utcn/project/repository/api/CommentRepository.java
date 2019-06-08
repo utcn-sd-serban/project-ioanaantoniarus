@@ -10,8 +10,8 @@ public interface CommentRepository {
 
     void delete(int id);
 
-    void update(int id);
+    void update(Comment comment);
 
-    List<Comment> findBookComment(int bookId);
+    List<Comment> findReviewComment(int bookId);
 
 }

@@ -12,12 +12,12 @@ public class Comment {
     private String text;
     private String username;
     private String commentDate;
-    private int bookId;
+    private int reviewId;
 
-    public Comment(String text,String username,String commentDate,int bookId){
+    public Comment(String text,String username,String commentDate,int reviewId){
         this.text=text;
         this.username=username;
         this.commentDate=commentDate;
-        this.bookId=bookId;
+        this.reviewId=reviewId;
     }
 }

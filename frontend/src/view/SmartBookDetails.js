@@ -42,7 +42,9 @@ export default class SmartBookDetails extends Component {
                 newReviewTitle={this.state.newReviewTitle}
                 newReviewText={this.state.newReviewText}
                 onChange={bookDetailsPresenter.onChange}
-                onAddReview={bookDetailsPresenter.onAddReview} />
+                onAddReview={bookDetailsPresenter.onAddReview}
+                onAddRating={bookDetailsPresenter.onAddRating}
+                onViewDetails={bookDetailsPresenter.onViewDetails} />
         );
     }
 

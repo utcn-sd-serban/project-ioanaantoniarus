@@ -95,6 +95,19 @@ export default class RestClient {
         }).then(response => response.json());
     }
 
+    updateRating(id, rating) {
+        return fetch(BASE_URL + "/books/" + id , {
+            method: "POST",
+            body: JSON.stringify({
+                rating: rating
+            }),
+            headers: {
+                "Authorization": this.authorization,
+                "Content-Type": "application/json"
+            }
+        }).then(response => response.json());
+    }
+
     getUserInfo() {
         return fetch(BASE_URL + "/me", {
             method: "GET",
@@ -104,6 +117,25 @@ export default class RestClient {
         }).then(response => response.json());
     }
 
+    loadReviewComments(id) {
+        return fetch(BASE_URL + "/reviews/" + id + "/comments", {
+            method: "GET",
+            headers: {
+                "Authorization": this.authorization
+            }
+        }).then(response => response.json());
+    }
 
-
+    createComment(text, id) {
+        return fetch(BASE_URL + "/reviews/" + id + "/comments", {
+            method: "POST",
+            body: JSON.stringify({
+                text: text
+            }),
+            headers: {
+                "Authorization": this.authorization,
+                "Content-Type": "application/json"
+            }
+        }).then(response => response.json());
+    }
 }

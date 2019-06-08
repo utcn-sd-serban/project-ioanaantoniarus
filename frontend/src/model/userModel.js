@@ -46,12 +46,12 @@ class UserModel extends EventEmitter {
                 type: userInfo.type
             } };
             this.emit("change", this.state);
+            return userInfo;
         });
     }
 
     getUserType() {
-        this.getUserInfo();
-        return this.state.currentUser.type;
+        return this.getUserInfo().then(userInfo => userInfo.type);
     }
 }
 

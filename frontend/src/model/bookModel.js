@@ -25,6 +25,13 @@ class BookModel extends EventEmitter {
                 username: "",
                 text: "",
                 reviewDate: ""
+            },
+            comments: [],
+            newComment: {
+                id: "",
+                username: "",
+                text: "",
+                commentDate: ""
             }
         };
     }
@@ -57,6 +64,18 @@ class BookModel extends EventEmitter {
         var id = this.getBookId(index);
         return client.loadBookReviews(id).then(reviews => {
             this.state = { ...this.state, reviews: reviews };
+            this.emit("change", this.state);
+        });
+    }
+
+    getReviewId(index) {
+        return this.state.reviews[index].id;
+    }
+
+    loadComments(index) {
+        var id = this.getReviewId(index);
+        return client.loadReviewComments(id).then(comments => {
+            this.state = { ...this.state, comments: comments };
             this.emit("change", this.state);
         });
     }
@@ -112,6 +131,9 @@ class BookModel extends EventEmitter {
             });
     }
 
+    addRating(id, rating) {
+        return client.updateRating(id, rating);
+    }
 
     changeNewReviewProperty(property, value) {
         this.state = {
@@ -124,6 +146,27 @@ class BookModel extends EventEmitter {
         this.emit("change", this.state);
     }
 
+    changeNewCommentProperty(property, value) {
+        this.state = {
+            ...this.state,
+            newComment: {
+                ...this.state.newReview,
+                [property]: value
+            }
+        };
+        this.emit("change", this.state);
+    }
+
+    addComment(text, id) {
+        return client.createComment(text, id)
+            .then(comment => {
+                this.state = {
+                    ...this.state,
+                    comments: this.state.comments.concat([comment])
+                };
+                this.emit("change", this.state);
+            });
+    }
 }
 
 const bookModel = new BookModel();

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 const CreateBook = ({ newBookName, newBookAuthor, newBookIsbn, newBookGenres, onCreate, onChange }) => (
     <div className="jumbotron text-center">
-        <h2 className="bg-warning text-white">Add Question</h2>
+        <h2 className="bg-warning text-white">Add Book</h2>
         <div>
             <label>Title: </label>
             <input type="text" className="form-control" value={newBookName} onChange={e => onChange("name", e.target.value)} />

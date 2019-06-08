@@ -38,7 +38,7 @@ public class JdbcReviewRepository implements ReviewRepository {
 
     @Override
     public List<Review> findBookReview(int bookId) {
-        List reviews=template.query("SELECT * FROM review WHERE id_book= ?",new Object[]{ bookId },
+        List<Review> reviews=template.query("SELECT * FROM review WHERE id_book= ?",new Object[]{ bookId },
                 new ReviewMapper());
         return reviews;
     }
